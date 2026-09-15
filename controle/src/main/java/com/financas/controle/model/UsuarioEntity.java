@@ -30,5 +30,4 @@ public class UsuarioEntity {
     @Column(name = "saldo")
     private Double saldo;
 
-
 }

@@ -17,7 +17,7 @@ public class UsuarioService {
     private final ConverterDtosParaEntity converterDtosPara;
 
 
-    public void CadastrarUsuario(UsuarioRequest usuario) {
+    public void cadastrarUsuario(UsuarioRequest usuario) {
 
         UsuarioEntity usuarioEntity = converterDtosPara.ConverterParaUsuarioEntity(usuario);
 

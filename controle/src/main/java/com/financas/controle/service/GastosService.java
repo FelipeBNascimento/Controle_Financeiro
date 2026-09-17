@@ -3,6 +3,7 @@ package com.financas.controle.service;
 
 import com.financas.controle.dtos.ConverterDtosParaEntity;
 import com.financas.controle.dtos.GastosRequest;
+import com.financas.controle.model.Categoria;
 import com.financas.controle.model.GastosEntity;
 import com.financas.controle.model.UsuarioEntity;
 import com.financas.controle.repository.GastosRepository;
@@ -46,10 +47,10 @@ public class GastosService {
         repository.deleteById(id);
     }
 
-    public Double somarGastos(Long id){
+    public Double somarGastos(Long id, Categoria categoria){
 
         // buscando a lista de gasto pelo usuario
-        List<GastosEntity> listaGastos = repository.findAllByUsuarioId(id);
+        List<GastosEntity> listaGastos = repository.findAllByUsuarioIdAndCategoria(id, categoria);
 
         // criando uma lista de somatoria para somar os valores gastos depois
         List<Double> somatoria = new ArrayList<>();
@@ -77,8 +78,8 @@ public class GastosService {
 
     }
 
-    public Double MostrarValoresGastos(Long id){
+    public Double MostrarValoresGastos(Long id, Categoria categoria){
 
-        return somarGastos(id);
+        return somarGastos(id, categoria);
     }
 }

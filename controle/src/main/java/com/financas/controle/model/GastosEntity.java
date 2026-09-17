@@ -28,6 +28,7 @@ public class GastosEntity {
     private Double valor;
 
     @Column(name = "categoria")
+    @Enumerated(EnumType.STRING)
     private Categoria categoria;
 
     @Column(name = "motivo")

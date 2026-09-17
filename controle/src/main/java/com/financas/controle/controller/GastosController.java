@@ -2,6 +2,7 @@ package com.financas.controle.controller;
 
 
 import com.financas.controle.dtos.GastosRequest;
+import com.financas.controle.model.Categoria;
 import com.financas.controle.service.GastosService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -23,9 +24,9 @@ public class GastosController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping
-    public ResponseEntity<Double> mostrarTotalGasto(@RequestParam Long id){
+    @GetMapping("{id}")
+    public ResponseEntity<Double> mostrarTotalGasto(@PathVariable Long id, @RequestParam Categoria categoria){
 
-        return ResponseEntity.ok(service.somarGastos(id));
+        return ResponseEntity.ok(service.somarGastos(id, categoria));
     }
 }

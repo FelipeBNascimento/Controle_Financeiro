@@ -27,6 +27,6 @@ public class GastosController {
     @GetMapping("{id}")
     public ResponseEntity<Double> mostrarTotalGasto(@PathVariable Long id, @RequestParam Categoria categoria){
 
-        return ResponseEntity.ok(service.somarGastos(id, categoria));
+        return ResponseEntity.ok(service.mostrarValoresGastos(id, categoria));
     }
 }

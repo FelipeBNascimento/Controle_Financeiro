@@ -78,7 +78,7 @@ public class GastosService {
 
     }
 
-    public Double MostrarValoresGastos(Long id, Categoria categoria){
+    public Double mostrarValoresGastos(Long id, Categoria categoria){
 
         return somarGastos(id, categoria);
     }

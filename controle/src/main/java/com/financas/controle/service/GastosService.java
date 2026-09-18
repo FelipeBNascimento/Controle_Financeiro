@@ -3,6 +3,7 @@ package com.financas.controle.service;
 
 import com.financas.controle.dtos.ConverterDtosParaEntity;
 import com.financas.controle.dtos.GastosRequest;
+import com.financas.controle.exceptions.IdNaoEncontrado;
 import com.financas.controle.model.Categoria;
 import com.financas.controle.model.GastosEntity;
 import com.financas.controle.model.UsuarioEntity;
@@ -31,7 +32,10 @@ public class GastosService {
         // setando a data do gasto que sempre sera a data do dia que cadastrar
         gastosEntity.setData(LocalDate.now());
         //buscando um usuario no banco de dados pelo id
-        UsuarioEntity usuarioEntity = usuarioRepository.findById(id).orElseThrow();
+        UsuarioEntity usuarioEntity = usuarioRepository.findById(id).orElseThrow(
+
+                ()-> new IdNaoEncontrado("usuario não cadastrado")
+        );
 
         // setando o usuario na tabela dos gastos
         gastosEntity.setUsuario(usuarioEntity);
@@ -47,7 +51,7 @@ public class GastosService {
         repository.deleteById(id);
     }
 
-    public Double somarGastos(Long id, Categoria categoria){
+    private Double somarGastos(Long id, Categoria categoria){
 
         // buscando a lista de gasto pelo usuario
         List<GastosEntity> listaGastos = repository.findAllByUsuarioIdAndCategoria(id, categoria);
@@ -81,5 +85,20 @@ public class GastosService {
     public Double mostrarValoresGastos(Long id, Categoria categoria){
 
         return somarGastos(id, categoria);
+    }
+
+    public List<GastosEntity> mostrarCategoria (Categoria categoria){
+
+         List<GastosEntity> lista =  repository.findAllByCategoria(categoria);
+
+        return lista;
+
+    }
+
+
+    public void excluirGastos(Long id){
+
+        repository.deleteById(id);
+
     }
 }

@@ -4,6 +4,7 @@ package com.financas.controle.service;
 import com.financas.controle.dtos.ConverterDtosParaEntity;
 import com.financas.controle.dtos.UsuarioRequest;
 import com.financas.controle.dtos.UsuarioResponse;
+import com.financas.controle.exceptions.IdNaoEncontrado;
 import com.financas.controle.model.UsuarioEntity;
 import com.financas.controle.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +27,10 @@ public class UsuarioService {
 
     public UsuarioResponse mostrarUsuarioPeloID(Long id) {
 
-        UsuarioEntity usuarioBanco = repository.findById(id).orElseThrow();
+        UsuarioEntity usuarioBanco = repository.findById(id).orElseThrow(
+
+                () -> new IdNaoEncontrado("Id nao encontrado")
+        );
 
         return converterDtosPara.converterParaUsuarioResponse(usuarioBanco);
 

@@ -12,4 +12,7 @@ public interface GastosRepository extends JpaRepository<GastosEntity, Long> {
 
     List<GastosEntity> findAllByUsuarioIdAndCategoria(Long id, Categoria categoria);
 
+
+    List<GastosEntity> findAllByCategoria(Categoria categoria);
+
 }

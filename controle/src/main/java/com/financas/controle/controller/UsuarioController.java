@@ -2,6 +2,8 @@ package com.financas.controle.controller;
 
 import com.financas.controle.dtos.UsuarioRequest;
 import com.financas.controle.dtos.UsuarioResponse;
+import com.financas.controle.exceptions.ExceptionsHandler;
+import com.financas.controle.exceptions.IdNaoEncontrado;
 import com.financas.controle.service.UsuarioService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 public class UsuarioController {
 
     private final UsuarioService service;
+
+    private final ExceptionsHandler exceptionHandler;
 
 
 
@@ -28,7 +32,14 @@ public class UsuarioController {
     @GetMapping
     public ResponseEntity<UsuarioResponse> mostrarUsuarios(@RequestParam Long id){
 
-        return ResponseEntity.ok(service.mostrarUsuarioPeloID(id));
+        UsuarioResponse usuario =  service.mostrarUsuarioPeloID(id);
+
+        if (usuario==null){
+
+            throw new IdNaoEncontrado("");
+        }
+
+        return ResponseEntity.ok(usuario);
     }
 
     @DeleteMapping

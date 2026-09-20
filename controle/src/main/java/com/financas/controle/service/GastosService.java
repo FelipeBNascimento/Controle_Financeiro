@@ -22,81 +22,84 @@ public class GastosService {
 
     private final GastosRepository repository;
     private final ConverterDtosParaEntity converterDtosPara;
-    private final UsuarioRepository usuarioRepository;
+    private final UsuarioService usuarioService;
 
-    public void RegistrarGastos(Long id, GastosRequest request){
+    public void RegistrarGastos(Long id, GastosRequest request) {
 
-        // covertendo osgastos que vai ter que passar para o banco
+        //buscando um usuario no banco de dados pelo id
+        UsuarioEntity usuarioEntity = usuarioService.buscarUsauriopeloId(id);
+
+        // covertendo os gastos que vai ter que passar para o banco
         GastosEntity gastosEntity = converterDtosPara.ConverterParaGastosEntity(request);
 
         // setando a data do gasto que sempre sera a data do dia que cadastrar
         gastosEntity.setData(LocalDate.now());
-        //buscando um usuario no banco de dados pelo id
-        UsuarioEntity usuarioEntity = usuarioRepository.findById(id).orElseThrow(
-
-                ()-> new IdNaoEncontrado("usuario não cadastrado")
-        );
 
         // setando o usuario na tabela dos gastos
         gastosEntity.setUsuario(usuarioEntity);
+
+
+        // atualizando saldo do usuario
+        usuarioService.atualizarSaldoUsuario(id, gastosEntity.getValor());
 
         repository.save(gastosEntity);
 
     }
 
-    public void apagarGasto(Long id){
-
+    public void apagarGasto(Long id) {
 
 
         repository.deleteById(id);
     }
 
-    private Double somarGastos(Long id, Categoria categoria){
 
-        // buscando a lista de gasto pelo usuario
+    // Essa metodo seria para conferir os gastos
+    private Double somarGastos(Long id, Categoria categoria) {
+
+        // buscando a lista de gasto de um usuario pelo id e pela categoria
         List<GastosEntity> listaGastos = repository.findAllByUsuarioIdAndCategoria(id, categoria);
 
-        // criando uma lista de somatoria para somar os valores gastos depois
+        // criando uma lista de somatoria para somar os valores gastos do usuario pela categoria depois
         List<Double> somatoria = new ArrayList<>();
 
         // criando ma varivel para dar o retorno depois de somado
         Double soma = 0.0;
 
         // usando for para adicionar cada valos da lista
-       for (GastosEntity valor : listaGastos){
+        for (GastosEntity valor : listaGastos) {
 
-           if(valor.getValor() != null){
-               somatoria.add(valor.getValor());
-           }
+            if (valor.getValor() != null) {
+                somatoria.add(valor.getValor());
+            }
 
 
-       }
-        // fazendo a somatoria dos valos da lista de valores
+        }
+        // fazendo a somatoria dos valores da lista de valores
 
-        for (Double valores : somatoria){
+        for (Double valores : somatoria) {
 
-            soma+=valores;
+            soma += valores;
         }
 
         return soma;
 
     }
 
-    public Double mostrarValoresGastos(Long id, Categoria categoria){
+    public Double mostrarValoresGastos(Long id, Categoria categoria) {
 
         return somarGastos(id, categoria);
     }
 
-    public List<GastosEntity> mostrarCategoria (Categoria categoria){
+    public List<GastosEntity> mostrarCategoria(Categoria categoria) {
 
-         List<GastosEntity> lista =  repository.findAllByCategoria(categoria);
+        List<GastosEntity> lista = repository.findAllByCategoria(categoria);
 
         return lista;
 
     }
 
 
-    public void excluirGastos(Long id){
+    public void excluirGastos(Long id) {
 
         repository.deleteById(id);
 

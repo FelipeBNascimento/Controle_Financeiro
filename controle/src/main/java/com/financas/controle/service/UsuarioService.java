@@ -10,6 +10,9 @@ import com.financas.controle.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class UsuarioService {
@@ -18,6 +21,7 @@ public class UsuarioService {
     private final ConverterDtosParaEntity converterDtosPara;
 
 
+    // cadastrar usuario
     public void cadastrarUsuario(UsuarioRequest usuario) {
 
         UsuarioEntity usuarioEntity = converterDtosPara.ConverterParaUsuarioEntity(usuario);
@@ -25,26 +29,24 @@ public class UsuarioService {
         repository.save(usuarioEntity);
     }
 
+    // buscar usuario pelo id
     public UsuarioResponse mostrarUsuarioPeloID(Long id) {
 
-        UsuarioEntity usuarioBanco = repository.findById(id).orElseThrow(
-
-                () -> new IdNaoEncontrado("Id nao encontrado")
-        );
-
+        UsuarioEntity usuarioBanco = buscarUsauriopeloId(id);
         return converterDtosPara.converterParaUsuarioResponse(usuarioBanco);
 
     }
 
+    // deletar usuario
     public void deletarUsuario(Long id) {
 
         repository.deleteById(id);
     }
 
+    // atualizar usuario
     public void atualizarUsuario(UsuarioRequest usuarioRequest, Long id) {
 
-
-        UsuarioEntity usuarioBanco = repository.findById(id).orElseThrow();
+        UsuarioEntity usuarioBanco = buscarUsauriopeloId(id);
 
         UsuarioEntity usuarioAtualizado = UsuarioEntity.builder()
 
@@ -53,7 +55,27 @@ public class UsuarioService {
                 .saldo(usuarioRequest.saldo() + usuarioBanco.getSaldo())
                 .build();
 
+        repository.saveAndFlush(usuarioAtualizado);
 
+    }
+
+    // atualizar saldo do usuario
+    public void atualizarSaldoUsuario(Long id, Double valor){
+
+        UsuarioEntity usuarioEntity = buscarUsauriopeloId(id);
+
+        usuarioEntity.setSaldo(usuarioEntity.getSaldo() - valor);
+
+        repository.saveAndFlush(usuarioEntity);
+
+    }
+
+    // buscar usuario pelo id metodo criado para facilitar busca de usuario
+    public UsuarioEntity buscarUsauriopeloId(Long id){
+
+        return repository.findById(id).orElseThrow(
+                () -> new IdNaoEncontrado("Usuario não encontrado")
+        );
     }
 
 

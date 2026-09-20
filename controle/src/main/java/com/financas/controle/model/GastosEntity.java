@@ -37,7 +37,11 @@ public class GastosEntity {
     @Column(name = "data")
     private LocalDate data;
 
-    @ManyToOne
+    @Column(name = "forma-pagamento")
+    @Enumerated(EnumType.STRING)
+    private FormaPagamento pagamento;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_usuario", nullable = false)
     private UsuarioEntity usuario;
 

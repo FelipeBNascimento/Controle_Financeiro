@@ -32,9 +32,10 @@ public class ConverterDtosParaEntity {
 
         GastosEntity gastosEntity = new GastosEntity();
         gastosEntity.setCategoria(request.categoria());
-        gastosEntity.setMotivo(request.motivo());
+        //gastosEntity.setMotivo(request.motivo());
         gastosEntity.setDescricao(request.descricao());
         gastosEntity.setValor(request.valor());
+        gastosEntity.setPagamento(request.pagamento());
 
         return gastosEntity;
 

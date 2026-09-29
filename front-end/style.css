@@ -1,0 +1,191 @@
+
+
+    body{
+
+    background-image: url(imagens/telafundo1.jpeg);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+
+}
+
+main{
+    flex-grow: 1;
+
+}
+
+   .login{
+
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    background: linear-gradient( 
+        315deg,
+        #0b1b2e 0%,
+        #102943 45% ,
+        #173a5e 100%
+    );
+    box-shadow: 0 0 15px rgba(59, 155, 232, 0.45);
+    /*background-color: #172a75;*/
+    border: solid, #173a5e 0.1rem;
+    border-radius: 1rem;
+    padding: 2rem;
+
+
+
+}
+
+/* Tamanho para celular*/
+
+@media (max-width: 767px) {
+
+
+.login{
+
+    margin: 40% 20% 0 20%;
+
+}
+}
+
+
+/* Tamanho para tablets*/
+
+
+@media (min-width: 768px) and (max-width: 1023px) {
+
+     .login{
+
+    margin: 15% 30% 0% 30%;
+
+}
+
+}
+
+
+/* Tamanho para desktops */
+
+@media (min-width: 1024px) {
+
+    .login{
+    margin: 15% 38% 0% 38%;
+
+}
+}
+
+   .login{
+
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    background: linear-gradient( 
+        315deg,
+        #0b1b2e 0%,
+        #102943 45% ,
+        #173a5e 100%
+    );
+    box-shadow: 0 0 15px rgba(59, 155, 232, 0.45);
+    /*background-color: #172a75;*/
+    border: solid, #173a5e 0.1rem;
+    border-radius: 1rem;
+    padding: 2rem;
+
+
+
+}
+
+h2, p{
+    color: #F2F2F2;
+    text-align: center;
+}
+
+.formulario{
+
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.formulario-input{
+
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    justify-content: flex-start;
+
+    
+}
+  
+label{
+    color: #F2F2F2;
+}
+
+.formulario-botao{
+
+     background: linear-gradient( 
+      
+        #2B7ACB  0%,
+        #2B7ACB  45% ,
+        #144B7C  100%
+    );
+    box-shadow: 0 0 6px #5dbbff;
+    border: solid, #96DAFF 0.05rem;
+    border-radius: 0.2rem;
+    color: white;
+    font-size: 0.7rem;
+    padding: 0.2rem;
+
+}
+
+.cadastrar{
+
+    text-decoration: none;
+    color: white;
+  
+    font-size: 1rem;
+}
+
+
+
+.rodape {
+
+    background-color: #F2F2F2;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2.5%;
+    padding-left: 2.5%; 
+    padding-right: 2.5%;
+    padding-top: .5%;
+
+}
+
+.texto-rodape{
+
+    color: black;
+}
+
+.rodape_whatsapp {
+
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;;
+}
+
+
+.rodape_img {
+
+    width: 25px !important;
+    height: 25px !important;
+    border: 1px;
+    border-radius: 50%;
+
+}
+

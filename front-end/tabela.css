@@ -1,0 +1,183 @@
+
+:root {
+  --cor-texto: #ffffff;
+  --subtitulo: #67c3ee;
+  --placeholder: #8FAED0;
+  --background: #00152D;
+  --fundotransparente: #031D3B;
+
+  --tamanhofontlabels: 0.95rem;
+  --tamanhofontinputs: 0.875rem;
+  
+}
+
+
+    body{
+
+    background-color: var(--background);
+
+     background: linear-gradient( 
+        135deg,
+        #03182E,
+        #00152D 50% ,
+        #001733);
+
+
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+
+}
+
+main{
+    flex-grow: 1;
+}
+
+
+/*Estilo da sessão de cadastro*/
+.session-cadastro{
+
+    display: flex;
+    flex-direction: column;
+   
+    gap: 2rem;
+}
+
+.session-cadastro-textos{
+
+    background-color: var(--fundotransparente);
+    border: 1px solid #147BD1;
+    padding: 5% 15% 5% 5%;
+    border-radius: 1rem;;
+    /*max-width: 49rem;*/
+
+
+
+}
+
+@media(max-width: 767px){
+
+    .session-cadastro{
+
+         margin: 15% 25% 15% 25%;
+     
+    }
+
+}
+
+.titulo{
+
+   
+    color: var(--cor-texto);
+    font-size: 1.32rem;
+    font-weight: 700;
+    line-height: 1.2;
+   
+
+}
+
+.subtitulo{
+
+    color: var(--subtitulo);
+    font-size: 1rem;
+    font-weight: 400;
+    margin-top: 0.25rem;
+   
+}
+
+.formulario-gastos{
+
+
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;;
+
+}
+
+label{
+
+    color: var(--cor-texto);
+    font-size: var(--tamanhofontlabels);
+    font-weight: 600;
+
+
+
+}
+
+input ::placeholder, textarea ::placeholder{
+
+    font-size: var(--tamanhofontinputs);
+    color: var(--placeholder);
+    color: var(--cor-texto);
+}
+
+input, textarea, select, option, button{
+
+    font-size: var(--tamanhofontinputs);
+    background-color: var(--fundotransparente);
+    color: var(--cor-texto);
+    border: 1px solid #147BD1;
+
+    
+
+}
+
+/*Estilo da sessão de Visualização*/
+
+/*.vizualizacao-tabela{
+
+    display: flex;
+    flex-direction: column;
+}*/
+
+.teste{
+
+    display: flex;
+    justify-content: space-around;
+    padding: 5% 5% 5% 5%;
+}
+
+.tabela{
+
+    color: var(--cor-texto);
+}
+
+
+.rodape {
+
+    background-color: #F2F2F2;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2.5%;
+    padding-left: 2.5%; 
+    padding-right: 2.5%;
+    padding-top: .5%;
+
+}
+
+.texto-rodape{
+
+    color: black;
+}
+
+.rodape_whatsapp {
+
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;;
+}
+
+
+.rodape_img {
+
+    width: 25px !important;
+    height: 25px !important;
+    border: 1px;
+    border-radius: 50%;
+
+}

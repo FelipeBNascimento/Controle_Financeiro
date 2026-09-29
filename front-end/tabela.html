@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle-Despesas</title>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="tabela.css">
+
+</head>
+
+<body>
+
+    <head>
+
+
+    </head>
+    <main>
+
+        <section class="session-cadastro">
+            <div class="session-cadastro-textos">
+                <h1 class="titulo">Cadastro de Gastos</h1>
+                <p class="subtitulo">Registre seus gastos de forma simples e organizada.</p>
+
+            </div>
+
+
+
+            <form class="formulario-gastos" method="post">
+
+
+                <label for="valor">Valor</label>
+                <input type="number" step="0.01" placeholder="EX : 150,00">
+
+                <label for="motivo">Motivo</label>
+                <input type="text" placeholder="EX: Compras, Alimentação, Remédio">
+
+                <!-- usando o selec para selecionar ao menos um Enum de Categoria vindo do Back-end JAVA-->
+
+                <label for="categoria">Categoria</label>
+                <select name="Categoria">
+
+                    <option value="" disabled selected>Selecione um categoria</option>
+                    <option value="Lazer">Lazer</option>
+                    <option value="Investimento">Investimento</option>
+                    <option value="Emergencia">Emergencia</option>
+                    <option value="Investimento">Investimento</option>
+                    <option value="Essencial">Essencial</option>
+                </select>
+
+
+                <!-- usando o selec para selecionar ao menos um Enum de Categoria vindo do Back-end JAVA-->
+
+                <label for="forma-pagamento">Cartão Debito</label>
+
+
+                <select name="Forma-Pagamento">
+
+                    <option value="" disabled selected>Selecione um categoria</option>
+                    <option value="Debito">Cartão Debito</option>
+                    <option value="Credito">Cartão Credito</option>
+                    <option value="Pix">Pix</option>
+                    <option value="Dinheiro">Dinheiro</option>
+
+                </select>
+
+                <label for="descricao">Descrição</label>
+                <textarea rows="5" cols="30" placeholder="Adicione mais detalhes sobre o gastos(opcional)"></textarea>
+
+
+                <button type="reset">Limpar</button>
+                <button type="submit">Salvar</button>
+
+            </form>
+
+        </section>
+
+        <section class="vizualizacao-tabela">
+
+            <div class="teste">
+                <h1 class="titulo">Últimos Gastos</h1>
+                <button> Ver todos</button>
+            </div>
+
+            <table class="tabela">
+
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Descrição</th>
+                        <th>Categoria</th>
+                        <th>Forma de Pagamento</th>
+                        <th>Valor</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr class="coluna-principal">
+
+                        <td id="visuzalizar-data"> 27-09-2025</td>
+                        <td id="visuzalizar-descricao"> Supermecado</td>
+                        <td id="visuzalizar-categoria"> Alimentacao</td>
+                        <td id="visuzalizar-forma_pagamento"> PIX</td>
+                        <td id="visuzalizar-valor">320,00</td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+
+
+
+
+
+
+        </section>
+
+    </main>
+    <footer class="rodape">
+        <p class="texto-rodape">Felipe Bazan</p>
+
+        <div class="rodape_whatsapp">
+            <img class="rodape_img" src="imagens/logo-whasapp.jfif" alt="Whatsapp">
+            <p class="texto-rodape">(11)91919-2697</p>
+        </div>
+
+        <a href="http://github.com/FelipeBNascimento">
+            <img class="rodape_img" src="imagens/logo-github.png" alt="github">
+        </a>
+
+        <a href="https://www.linkedin.com/in/felipe-bazan-35b22691/">
+            <img class="rodape_img" src="imagens/logo-linkedin.png" alt="Linkedin">
+        </a>
+    </footer>
+
+</body>
+
+</html>

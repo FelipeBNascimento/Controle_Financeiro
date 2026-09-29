@@ -90,6 +90,7 @@ public class GastosService {
         return somarGastos(id, categoria);
     }
 
+
     public List<GastosEntity> mostrarCategoria(Categoria categoria) {
 
         List<GastosEntity> lista = repository.findAllByCategoria(categoria);

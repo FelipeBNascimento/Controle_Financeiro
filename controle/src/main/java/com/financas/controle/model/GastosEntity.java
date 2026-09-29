@@ -31,8 +31,8 @@ public class GastosEntity {
     @Enumerated(EnumType.STRING)
     private Categoria categoria;
 
-    @Column(name = "motivo")
-    private String motivo;
+    //@Column(name = "motivo")
+    //private String motivo;
 
     @Column(name = "data")
     private LocalDate data;

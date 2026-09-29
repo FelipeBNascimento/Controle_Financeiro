@@ -7,7 +7,7 @@ public record GastosRequest(
         String descricao,
         Double valor,
         Categoria categoria,
-        String motivo,
+        //String motivo,
         FormaPagamento pagamento
 
 ) {

@@ -7,9 +7,11 @@ import com.financas.controle.dtos.UsuarioResponse;
 import com.financas.controle.exceptions.IdNaoEncontrado;
 import com.financas.controle.model.UsuarioEntity;
 import com.financas.controle.repository.UsuarioRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,21 +54,35 @@ public class UsuarioService {
 
                 .nome(usuarioBanco.getNome().equals(usuarioRequest.nome()) ? usuarioBanco.getNome() : usuarioRequest.nome())
                 .email(usuarioBanco.getEmail().equals(usuarioRequest.email()) ? usuarioBanco.getEmail() : usuarioRequest.email())
-                .saldo(usuarioRequest.saldo() + usuarioBanco.getSaldo())
+                .saldo(usuarioBanco.getSaldo().equals(usuarioRequest.saldo())? usuarioBanco.getSaldo(): usuarioRequest.saldo())
                 .build();
 
         repository.saveAndFlush(usuarioAtualizado);
 
     }
 
-    // atualizar saldo do usuario
-    public void atualizarSaldoUsuario(Long id, Double valor){
+    // adicionarSaldo
+
+    @Transactional
+    public void adicionarSaldo(Long id, BigDecimal saldo){
 
         UsuarioEntity usuarioEntity = buscarUsauriopeloId(id);
 
-        usuarioEntity.setSaldo(usuarioEntity.getSaldo() - valor);
+        usuarioEntity.setSaldo(usuarioEntity.getSaldo().add(saldo));
 
-        repository.saveAndFlush(usuarioEntity);
+        repository.save(usuarioEntity);
+
+    }
+
+    // atualizar saldo do usuario
+    @Transactional
+    public void atualizarSaldoUsuario(Long id, BigDecimal valor){
+
+        UsuarioEntity usuarioEntity = buscarUsauriopeloId(id);
+
+        usuarioEntity.setSaldo(usuarioEntity.getSaldo().subtract(valor));
+
+        repository.save(usuarioEntity);
 
     }
 

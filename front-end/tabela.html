@@ -31,12 +31,12 @@
 
 
                 <label for="valor">Valor</label>
-                <input type="number" step="0.01" placeholder="EX : 150,00">
+                <input type="number" id="valor" step="0.01" placeholder="EX : 150,00" >
 
                 <label for="motivo">Motivo</label>
                 <input type="text" placeholder="EX: Compras, Alimentação, Remédio">
 
-                <!-- usando o selec para selecionar ao menos um Enum de Categoria vindo do Back-end JAVA-->
+                <!-- usando o select para selecionar ao menos um Enum de Categoria vindo do Back-end JAVA-->
 
                 <label for="categoria">Categoria</label>
                 <select name="Categoria">
@@ -50,7 +50,7 @@
                 </select>
 
 
-                <!-- usando o selec para selecionar ao menos um Enum de Categoria vindo do Back-end JAVA-->
+                <!-- usando o select para selecionar ao menos um Enum de Categoria vindo do Back-end JAVA-->
 
                 <label for="forma-pagamento">Cartão Debito</label>
 
@@ -70,7 +70,7 @@
 
 
                 <button type="reset">Limpar</button>
-                <button type="submit">Salvar</button>
+                <button type="button" id="botao">Salvar</button>
 
             </form>
 
@@ -95,15 +95,32 @@
                     </tr>
                 </thead>
 
-                <tbody>
-                    <tr class="coluna-principal">
+                <tbody class="tabela-consulta" id="lista-gastos">
 
-                        <td id="visuzalizar-data"> 27-09-2025</td>
-                        <td id="visuzalizar-descricao"> Supermecado</td>
-                        <td id="visuzalizar-categoria"> Alimentacao</td>
-                        <td id="visuzalizar-forma_pagamento"> PIX</td>
-                        <td id="visuzalizar-valor">320,00</td>
+                    <tr>
+                        <td data-label="Data">27/09/2025</td>
+                        <td data-label="Descrição">Supermercado</td>
+                        <td data-label="Categoria">Alimentação</td>
+                        <td data-label="Pagamento">PIX</td>
+                        <td data-label="Valor">R$ 320,00</td>
+                    </tr>
 
+                       <tr>
+                        <td data-label="Data">27/09/2025</td>
+                        <td data-label="Descrição">Supermercado</td>
+                        <td data-label="Categoria">Alimentação</td>
+                        <td data-label="Pagamento">PIX</td>
+                        <td data-label="Valor">R$ 320,00</td>
+                    </tr>
+
+                          </tr>
+
+                       <tr>
+                        <td data-label="Data">27/09/2025</td>
+                        <td data-label="Descrição">Supermercado</td>
+                        <td data-label="Categoria">Alimentação</td>
+                        <td data-label="Pagamento">PIX</td>
+                        <td data-label="Valor">R$ 320,00</td>
                     </tr>
 
                 </tbody>
@@ -135,6 +152,8 @@
             <img class="rodape_img" src="imagens/logo-linkedin.png" alt="Linkedin">
         </a>
     </footer>
+
+    <script src="script.js"></script>
 
 </body>
 

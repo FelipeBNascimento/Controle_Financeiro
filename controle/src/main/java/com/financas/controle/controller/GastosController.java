@@ -8,15 +8,17 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
+
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("api/vi/gastos")
+@RequestMapping("api/v1/gastos")
 public class GastosController {
 
     private final GastosService service;
 
-    @PostMapping
-    public ResponseEntity<Void> cadastrarGastos(@RequestBody GastosRequest gastosRequest, @RequestParam Long id){
+    @PostMapping("{id}")
+    public ResponseEntity<Void> cadastrarGastos(@RequestBody GastosRequest gastosRequest, @PathVariable Long id){
 
 
         service.RegistrarGastos(id, gastosRequest);
@@ -25,7 +27,7 @@ public class GastosController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Double> mostrarTotalGasto(@PathVariable Long id, @RequestParam Categoria categoria){
+    public ResponseEntity<BigDecimal> mostrarTotalGasto(@PathVariable Long id, @RequestParam Categoria categoria){
 
         return ResponseEntity.ok(service.mostrarValoresGastos(id, categoria));
     }

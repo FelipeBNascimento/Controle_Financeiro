@@ -1,8 +1,10 @@
 package com.financas.controle.dtos;
 
+import java.math.BigDecimal;
+
 public record UsuarioResponse(
 
-        String nome, Double saldo
+        String nome, BigDecimal saldo
 ) {
 
 

@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
@@ -25,7 +26,7 @@ public class GastosEntity {
     private String descricao;
 
     @Column(name = "valor")
-    private Double valor;
+    private BigDecimal valor;
 
     @Column(name = "categoria")
     @Enumerated(EnumType.STRING)

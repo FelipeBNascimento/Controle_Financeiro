@@ -9,9 +9,11 @@ import com.financas.controle.model.GastosEntity;
 import com.financas.controle.model.UsuarioEntity;
 import com.financas.controle.repository.GastosRepository;
 import com.financas.controle.repository.UsuarioRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +26,7 @@ public class GastosService {
     private final ConverterDtosParaEntity converterDtosPara;
     private final UsuarioService usuarioService;
 
+    @Transactional
     public void RegistrarGastos(Long id, GastosRequest request) {
 
         //buscando um usuario no banco de dados pelo id
@@ -53,43 +56,55 @@ public class GastosService {
     }
 
 
-    // Essa metodo seria para conferir os gastos
-    private Double somarGastos(Long id, Categoria categoria) {
+//    // Essa metodo seria para conferir os gasto
+//
+// Alterei o metodo todo com uma querie personalizada por sql economizando memoria
+//    private BigDecimal somarGastos(Long id, Categoria categoria) {
+//
+//        // buscando a lista de gasto de um usuario pelo id e pela categoria
+//        List<GastosEntity> listaGastos = repository.findAllByUsuarioIdAndCategoria(id, categoria);
+//
+//        // criando uma lista de somatoria para somar os valores gastos do usuario pela categoria depois
+//        List<BigDecimal> listaDeValores = new ArrayList<>();
+//
+//        // criando ma varivel para dar o retorno depois de somado
+//        BigDecimal soma = BigDecimal.ZERO;
+//
+//        // usando for para adicionar cada valos da lista
+//        for (GastosEntity valor : listaGastos) {
+//
+//            if (valor.getValor() != null) {
+//                listaDeValores.add(valor.getValor());
+//            }
+//
+//
+//        }
+//        // fazendo a somatoria dos valores da lista de valores
+//
+//        for (BigDecimal valores : listaDeValores) {
+//
+//            soma.add(valores);
+//        }
+//
+//        return soma;
+//
+//    }
 
-        // buscando a lista de gasto de um usuario pelo id e pela categoria
-        List<GastosEntity> listaGastos = repository.findAllByUsuarioIdAndCategoria(id, categoria);
+    private BigDecimal somarGastos (Categoria categoria, Long id) {
 
-        // criando uma lista de somatoria para somar os valores gastos do usuario pela categoria depois
-        List<Double> somatoria = new ArrayList<>();
+        BigDecimal valores = repository.somarGastosPorCategoria(categoria, id);
 
-        // criando ma varivel para dar o retorno depois de somado
-        Double soma = 0.0;
-
-        // usando for para adicionar cada valos da lista
-        for (GastosEntity valor : listaGastos) {
-
-            if (valor.getValor() != null) {
-                somatoria.add(valor.getValor());
-            }
-
-
+        if(valores!= null){
+            return valores;
+        }else {
+            return BigDecimal.ZERO;
         }
-        // fazendo a somatoria dos valores da lista de valores
-
-        for (Double valores : somatoria) {
-
-            soma += valores;
-        }
-
-        return soma;
 
     }
+    public BigDecimal mostrarValoresGastos(Long id, Categoria categoria) {
 
-    public Double mostrarValoresGastos(Long id, Categoria categoria) {
-
-        return somarGastos(id, categoria);
+        return somarGastos(categoria, id);
     }
-
 
     public List<GastosEntity> mostrarCategoria(Categoria categoria) {
 
@@ -99,10 +114,10 @@ public class GastosService {
 
     }
 
-
     public void excluirGastos(Long id) {
 
         repository.deleteById(id);
 
     }
 }
+

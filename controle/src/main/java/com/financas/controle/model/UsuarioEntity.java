@@ -4,6 +4,8 @@ package com.financas.controle.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
+
 
 @Entity
 @NoArgsConstructor
@@ -28,6 +30,6 @@ public class UsuarioEntity {
     private String senha;
 
     @Column(name = "saldo")
-    private Double saldo;
+    private BigDecimal saldo;
 
 }

@@ -1,6 +1,7 @@
 package com.financas.controle.service;
 
 
+import com.financas.controle.Config.security.JwtUtil;
 import com.financas.controle.dtos.ConverterDtosParaEntity;
 import com.financas.controle.dtos.UsuarioRequest;
 import com.financas.controle.dtos.UsuarioResponse;
@@ -9,6 +10,7 @@ import com.financas.controle.model.UsuarioEntity;
 import com.financas.controle.repository.UsuarioRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -21,15 +23,21 @@ public class UsuarioService {
 
     private final UsuarioRepository repository;
     private final ConverterDtosParaEntity converterDtosPara;
+    private final PasswordEncoder passwordEncoder;
+    private final JwtUtil jwtUtil;
 
 
     // cadastrar usuario
     public void cadastrarUsuario(UsuarioRequest usuario) {
 
+
         UsuarioEntity usuarioEntity = converterDtosPara.ConverterParaUsuarioEntity(usuario);
+        usuarioEntity.setSenha(passwordEncoder.encode(usuarioEntity.getSenha()));
 
         repository.save(usuarioEntity);
     }
+
+
 
     // buscar usuario pelo id
     public UsuarioResponse mostrarUsuarioPeloID(Long id) {

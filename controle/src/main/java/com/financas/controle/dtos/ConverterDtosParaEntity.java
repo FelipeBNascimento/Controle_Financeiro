@@ -5,6 +5,8 @@ import com.financas.controle.model.UsuarioEntity;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class ConverterDtosParaEntity {
@@ -39,6 +41,28 @@ public class ConverterDtosParaEntity {
 
         return gastosEntity;
 
+
+    }
+
+    public GastosResponse gastosResponse (GastosEntity entity){
+
+        GastosResponse gastosResponse = new GastosResponse(entity.getDescricao(), entity.getValor(), LocalDate.now(), entity.getCategoria(), entity.getPagamento());
+
+        return gastosResponse;
+    }
+
+
+    public List<GastosResponse> listaGastos (List<GastosEntity> gastosEntityList){
+
+        List<GastosResponse> listaDeGastos = new ArrayList<>();
+
+        for (GastosEntity gastos : gastosEntityList){
+
+            listaDeGastos.add(gastosResponse(gastos));
+
+        }
+
+        return listaDeGastos;
 
     }
 

@@ -6,6 +6,7 @@ import com.financas.controle.dtos.UsuarioResponse;
 import com.financas.controle.exceptions.ExceptionsHandler;
 import com.financas.controle.exceptions.IdNaoEncontrado;
 import com.financas.controle.service.UsuarioService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -27,7 +28,7 @@ public class UsuarioController {
 
 
     @PostMapping
-    public ResponseEntity<Void> cadastrarUsuario(@RequestBody UsuarioRequest usuarioRequest){
+    public ResponseEntity<Void> cadastrarUsuario(@Valid @RequestBody UsuarioRequest usuarioRequest){
 
         service.cadastrarUsuario(usuarioRequest);
 

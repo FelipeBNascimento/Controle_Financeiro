@@ -3,6 +3,7 @@ package com.financas.controle.service;
 
 import com.financas.controle.dtos.ConverterDtosParaEntity;
 import com.financas.controle.dtos.GastosRequest;
+import com.financas.controle.dtos.GastosResponse;
 import com.financas.controle.exceptions.IdNaoEncontrado;
 import com.financas.controle.model.Categoria;
 import com.financas.controle.model.GastosEntity;
@@ -106,11 +107,15 @@ public class GastosService {
         return somarGastos(categoria, id);
     }
 
-    public List<GastosEntity> mostrarCategoria(Categoria categoria) {
+    public List<GastosResponse> mostrarCategoria(Categoria categoria) {
+
+
 
         List<GastosEntity> lista = repository.findAllByCategoria(categoria);
 
-        return lista;
+        List<GastosResponse> listaGastosResponse = converterDtosPara.listaGastos(lista);
+
+        return listaGastosResponse;
 
     }
 

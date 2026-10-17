@@ -14,6 +14,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
+
 @RestController
 @RequestMapping("/api/v1/usuarios")
 @RequiredArgsConstructor
@@ -78,6 +80,15 @@ public class UsuarioController {
     public ResponseEntity<Void> atualizarUsuarios (@RequestParam Long id, @RequestBody UsuarioRequest usuarioRequest){
 
         service.atualizarUsuario(usuarioRequest, id);
+
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("{id}/saldo")
+
+    public ResponseEntity<Void> adizionarSaldo(@PathVariable Long id, @RequestParam BigDecimal saldo){
+
+        service.adicionarSaldo(id, saldo);
 
         return ResponseEntity.ok().build();
     }

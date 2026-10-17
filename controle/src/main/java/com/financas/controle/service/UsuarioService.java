@@ -60,9 +60,11 @@ public class UsuarioService {
 
         UsuarioEntity usuarioAtualizado = UsuarioEntity.builder()
 
+                .id(usuarioBanco.getId())
                 .nome(usuarioBanco.getNome().equals(usuarioRequest.nome()) ? usuarioBanco.getNome() : usuarioRequest.nome())
                 .email(usuarioBanco.getEmail().equals(usuarioRequest.email()) ? usuarioBanco.getEmail() : usuarioRequest.email())
                 .saldo(usuarioBanco.getSaldo().equals(usuarioRequest.saldo())? usuarioBanco.getSaldo(): usuarioRequest.saldo())
+                .senha(usuarioBanco.getSenha())
                 .build();
 
         repository.saveAndFlush(usuarioAtualizado);
@@ -73,6 +75,7 @@ public class UsuarioService {
 
     @Transactional
     public void adicionarSaldo(Long id, BigDecimal saldo){
+
 
         UsuarioEntity usuarioEntity = buscarUsauriopeloId(id);
 

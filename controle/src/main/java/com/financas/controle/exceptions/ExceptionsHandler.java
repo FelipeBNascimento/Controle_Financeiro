@@ -42,6 +42,8 @@ public class ExceptionsHandler {
 
     }
 
+
+    // essa excessão valida as request
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<MapeadorErros> metodosEmBranco(MethodArgumentNotValidException e){
 

@@ -18,6 +18,7 @@ public record GastosRequest(
         @NotNull
         Categoria categoria,
         //String motivo,
+
         @NotNull(message = "Método de pagamento obrigatório")
         FormaPagamento pagamento
 

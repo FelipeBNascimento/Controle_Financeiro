@@ -1,5 +1,7 @@
 package com.financas.controle.Config.security;
 
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
+import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,9 +20,12 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
+@SecurityScheme(name = SecurityConfig.SECURITY, type = SecuritySchemeType.HTTP, bearerFormat = "JWT", scheme = "bearer")
 
 public class SecurityConfig {
 
+
+    public static final String SECURITY = "bearerAuth";
 
     // Instâncias de JwtUtil e UserDetailsService injetadas pelo Spring
     @Autowired
@@ -48,6 +53,8 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/api/v1/usuarios").permitAll() // Permite acesso ao endpoint POST /usuario sem autenticação
                         .requestMatchers("/api/v1/usuarios/**").authenticated() // Requer autenticação para qualquer endpoint que comece com /usuario/
                         .requestMatchers("/api/v1/gastos/**").authenticated()// adicionado rota para gastos
+                        // todas requisições do swagger liberada
+                        .requestMatchers("/v3/api-docs/**", "/swagger-ui.html/**", "/swagger-ui/**").permitAll()
                         .anyRequest().authenticated() // Requer autenticação para todas as outras requisições
 
                 )

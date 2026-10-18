@@ -11,7 +11,7 @@ import java.util.List;
 @Component
 public class ConverterDtosParaEntity {
 
-    public UsuarioEntity ConverterParaUsuarioEntity (UsuarioRequest usuario){
+    public UsuarioEntity converterParaUsuarioEntity (UsuarioRequest usuario){
 
         UsuarioEntity usuarioEntity = new UsuarioEntity();
         usuarioEntity.setEmail(usuario.email());
@@ -30,7 +30,7 @@ public class ConverterDtosParaEntity {
         return usuarioResponse;
     }
 
-    public GastosEntity ConverterParaGastosEntity (GastosRequest request){
+    public GastosEntity converterParaGastosEntity (GastosRequest request){
 
         GastosEntity gastosEntity = new GastosEntity();
         gastosEntity.setCategoria(request.categoria());

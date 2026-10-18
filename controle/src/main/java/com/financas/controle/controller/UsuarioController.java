@@ -1,13 +1,20 @@
 package com.financas.controle.controller;
 
 import com.financas.controle.Config.security.JwtUtil;
+import com.financas.controle.Config.security.SecurityConfig;
 import com.financas.controle.dtos.UsuarioRequest;
 import com.financas.controle.dtos.UsuarioResponse;
 import com.financas.controle.exceptions.ExceptionsHandler;
 import com.financas.controle.exceptions.IdNaoEncontrado;
 import com.financas.controle.service.UsuarioService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.security.SecurityScheme;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -19,26 +26,35 @@ import java.math.BigDecimal;
 @RestController
 @RequestMapping("/api/v1/usuarios")
 @RequiredArgsConstructor
+
+@Tag(name = "usuarios", description = "Controle para salvar editar dados de usuarios")
+@SecurityRequirement(name = SecurityConfig.SECURITY)
 public class UsuarioController {
 
     private final UsuarioService service;
     private final JwtUtil jwtUtil;
     private final AuthenticationManager authenticationManager;
 
-    private final ExceptionsHandler exceptionHandler;
 
 
 
     @PostMapping
+    @Operation(summary = "Cadastrar usuarios", description = "cadastrar usuario ao banco de dados")
+    @ApiResponse(responseCode = "201", description = "Usuario cadastrado com sucesso")
+    @ApiResponse(responseCode = "400", description = "Falha ao cadastrar usuario")
     public ResponseEntity<Void> cadastrarUsuario(@Valid @RequestBody UsuarioRequest usuarioRequest){
 
         service.cadastrarUsuario(usuarioRequest);
 
-        return ResponseEntity.ok().build();
+        return ResponseEntity.status(HttpStatus.CREATED).build();
 
     }
 
+
     @PostMapping("/login")
+    @Operation(summary = "Logar com usuario", description = "Fazer login com usuario")
+    @ApiResponse(responseCode = "200",description = "Logado com sucesso")
+    @ApiResponse(responseCode = "403", description = "Acesso negado")
     public String login(@RequestBody UsuarioRequest usuarioDTO){
 
         Authentication authentication = authenticationManager.authenticate(
@@ -48,22 +64,11 @@ public class UsuarioController {
         return "Bearer " + jwtUtil.generateToken(authentication.getName());
 
     }
-
-    //  Authentication authentication = authenticationManager.authenticate(
-    //                new UsernamePasswordAuthenticationToken(
-    //                        usuarioDto.getEmail(), usuarioDto.getSenha()));
-    //        return "Bearer " +  jwtUtil.generateToken(authentication.getName());
-
     @GetMapping
+
     public ResponseEntity<UsuarioResponse> mostrarUsuarios(@RequestParam Long id){
 
         UsuarioResponse usuario =  service.mostrarUsuarioPeloID(id);
-
-        if (usuario==null){
-
-            throw new IdNaoEncontrado("");
-        }
-
         return ResponseEntity.ok(usuario);
     }
 
@@ -76,7 +81,10 @@ public class UsuarioController {
     }
 
     @PutMapping
-
+    @Operation(summary = "Atualizar dados usuario", description = "Informar novos dados atualizados")
+    @ApiResponse(responseCode = "200", description = "Dados atualizados com sucesso")
+    @ApiResponse(responseCode = "403", description = "Acesso negado")
+    @ApiResponse(responseCode = "400", description = "Erro ao atualizar dados")
     public ResponseEntity<Void> atualizarUsuarios (@RequestParam Long id, @RequestBody UsuarioRequest usuarioRequest){
 
         service.atualizarUsuario(usuarioRequest, id);
@@ -85,7 +93,10 @@ public class UsuarioController {
     }
 
     @PutMapping("{id}/saldo")
-
+    @Operation(summary = "Adicionar saldo usuario", description = "Informar valores para adicionar")
+    @ApiResponse(responseCode = "200", description = "saldo adicionado com sucesso")
+    @ApiResponse(responseCode = "403", description = "Acesso negado")
+    @ApiResponse(responseCode = "400", description = "Erro ao adicionar saldo")
     public ResponseEntity<Void> adizionarSaldo(@PathVariable Long id, @RequestParam BigDecimal saldo){
 
         service.adicionarSaldo(id, saldo);

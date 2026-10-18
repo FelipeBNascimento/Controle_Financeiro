@@ -14,8 +14,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -31,7 +29,7 @@ public class UsuarioService {
     public void cadastrarUsuario(UsuarioRequest usuario) {
 
 
-        UsuarioEntity usuarioEntity = converterDtosPara.ConverterParaUsuarioEntity(usuario);
+        UsuarioEntity usuarioEntity = converterDtosPara.converterParaUsuarioEntity(usuario);
         usuarioEntity.setSenha(passwordEncoder.encode(usuarioEntity.getSenha()));
 
         repository.save(usuarioEntity);

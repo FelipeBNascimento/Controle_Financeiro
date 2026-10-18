@@ -4,19 +4,16 @@ package com.financas.controle.service;
 import com.financas.controle.dtos.ConverterDtosParaEntity;
 import com.financas.controle.dtos.GastosRequest;
 import com.financas.controle.dtos.GastosResponse;
-import com.financas.controle.exceptions.IdNaoEncontrado;
 import com.financas.controle.model.Categoria;
 import com.financas.controle.model.GastosEntity;
 import com.financas.controle.model.UsuarioEntity;
 import com.financas.controle.repository.GastosRepository;
-import com.financas.controle.repository.UsuarioRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -34,7 +31,7 @@ public class GastosService {
         UsuarioEntity usuarioEntity = usuarioService.buscarUsauriopeloId(id);
 
         // covertendo os gastos que vai ter que passar para o banco
-        GastosEntity gastosEntity = converterDtosPara.ConverterParaGastosEntity(request);
+        GastosEntity gastosEntity = converterDtosPara.converterParaGastosEntity(request);
 
         // setando a data do gasto que sempre sera a data do dia que cadastrar
         gastosEntity.setData(LocalDate.now());
